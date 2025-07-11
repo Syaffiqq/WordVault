@@ -65,7 +65,7 @@ function showAllFiles() {
 
   fs.readdir(pathName, (err, files) => {
     if (err || files.length === 0) {
-      listContainer.innerText = '📭 No saved files found.';
+      listContainer.innerText = ' No saved files found.';
       return;
     }
 
@@ -73,7 +73,7 @@ function showAllFiles() {
       const filePath = path.join(pathName, file);
       fs.readFile(filePath, 'utf8', (err, data) => {
         if (!err) {
-          listContainer.innerHTML += `📁 ${file}\n${data}\n----------------------------\n`;
+          listContainer.innerHTML += ` ${file}\n${data}\n----------------------------\n`;
         }
       });
     });
