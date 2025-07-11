@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WordVault</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e0f2ff, #f7faff);
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      animation: fadeIn 0.6s ease-in;
+    }
+
+    h1 {
+      text-align: center;
+      color: #007acc;
+      font-size: 32px;
+      margin-bottom: 30px;
+    }
+
+    .search-bar {
+      text-align: center;
+      margin-bottom: 30px;
+      animation: fadeSlide 0.8s ease;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 250px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-right: 10px;
+      transition: border 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-color: #007acc;
+      outline: none;
+    }
+
+    button {
+      padding: 10px 18px;
+      font-size: 16px;
+      border: none;
+      background-color: #007acc;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #005a99;
+      transform: scale(1.05);
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: #007acc;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #005a99;
+    }
+
+    .box {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border-left: 6px solid #007acc;
+      transition: transform 0.3s ease;
+    }
+
+    .box:hover {
+      transform: translateY(-5px);
+    }
+
+    .box h2, .box h3 {
+      margin-top: 0;
+      color: #000000;
+      font-size: 20px;
+      border-bottom: 1px solid #e1e1e1;
+      padding-bottom: 6px;
+    }
+
+    .box p {
+      margin: 8px 0;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .collapsible {
+      background-color: #007acc;
+      color: white;
+      cursor: pointer;
+      padding: 14px 20px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 6px;
+      margin-top: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .collapsible:hover {
+      background-color: #005f99;
+    }
+
+    .content {
+      padding: 0 18px 12px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      background-color: #f9f9f9;
+      border-radius: 0 0 6px 6px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .content p {
+      margin: 10px 0;
+      padding: 8px 12px;
+      background-color: #ffffff;
+      border-left: 4px solid #007acc;
+      border-radius: 4px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #333;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    #nosyno, #adsyno, #noanto, #adanto {
+      background-color: #eef7ff;
+      font-style: italic;
+      color: #000000;
+      border-left: 4px solid #88c9f9;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes fadeSlide {
+      from {opacity: 0; transform: translateY(15px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📚 WordVault</h1>
+
+    <div class="search-bar">
+      <input type="text" id="word_input" placeholder="Enter word" />
+      <button onclick="buttonClicked()">🔍 Search</button>
+      <br />
+      <a href="crud.html">📂 View Saved Words</a>
+    </div>
+
+    <div class="box" id="definitionSection">
+      <h2>Word</h2>
+      <p id="word"></p>
+    </div>
+
+    <button class="collapsible">Noun</button>
+    <div class="content">
+      <h3>Definitions</h3>
+      <p id="nodefinitions1"></p>
+      <p id="nodefinitions2"></p>
+      <p id="nodefinitions3"></p>
+      <h3>Synonyms & Antonyms</h3>
+      <p id="nosyno"></p>
+      <p id="noanto"></p>
+    </div>
+
+    <button class="collapsible">Adjective</button>
+    <div class="content">
+      <h3>Definitions</h3>
+      <p id="addefinitions1"></p>
+      <p id="addefinitions2"></p>
+      <p id="addefinitions3"></p>
+      <h3>Synonyms & Antonyms</h3>
+      <p id="adsyno"></p>
+      <p id="adanto"></p>
+    </div>
+
+    <button class="collapsible">Sound</button>
+    <div class="content">
+      <h3>Sound</h3>
+      <div id="soundAudio"></div>
+      <p id="soundLink"></p>
+    </div>
+
+    <button class="collapsible">Source</button>
+    <div class="content">
+      <h3>Source</h3>
+      <div id="sourceLink"></div>
+      <div id="sourceUrls"></div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
